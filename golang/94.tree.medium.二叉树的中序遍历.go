@@ -1,8 +1,4 @@
-package main
-
-import (
-	"fmt"
-)
+package golang
 
 /*
  * @lc app=leetcode.cn id=94 lang=golang
@@ -28,6 +24,7 @@ func inorderTraversal(root *TreeNode) []int {
 	for len(stack) > 0 || root != nil {
 		// push all left into stack
 		for root != nil {
+			stack = append(stack, root)
 			root = root.Left
 		}
 		// pop left leaf
@@ -42,22 +39,3 @@ func inorderTraversal(root *TreeNode) []int {
 }
 
 // @lc code=end
-
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
-}
-
-func main() {
-	root := &TreeNode{
-		Val: 1,
-		Right: &TreeNode{
-			Val: 2,
-			Left: &TreeNode{
-				Val: 3,
-			},
-		},
-	}
-	fmt.Println(inorderTraversal(root))
-}

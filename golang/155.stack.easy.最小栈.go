@@ -3,23 +3,23 @@
  *
  * [155] 最小栈
  */
+package golang
 
 // @lc code=start
 type MinStack struct {
-	min []int
+	min   []int
 	stack []int
 }
 
 /** initialize your data structure here. */
 func Constructor() MinStack {
 	return MinStack{
-		min: make([]int, 0),
+		min:   make([]int, 0),
 		stack: make([]int, 0),
 	}
 }
 
-
-func (this *MinStack) Push(x int)  {
+func (this *MinStack) Push(x int) {
 	this.stack = append(this.stack, x)
 	min := this.GetMin()
 	if x < min {
@@ -29,30 +29,27 @@ func (this *MinStack) Push(x int)  {
 	}
 }
 
-func (this *MinStack) Pop()  {
+func (this *MinStack) Pop() {
 	if len(this.stack) == 0 {
 		return
 	}
 	this.stack = this.stack[:len(this.stack)-1]
-    this.min = this.min[:len(this.min)-1]
+	this.min = this.min[:len(this.min)-1]
 }
-
 
 func (this *MinStack) Top() int {
 	if len(this.stack) == 0 {
 		return 0
 	}
-	return this.stack[len(this.stack) - 1]
+	return this.stack[len(this.stack)-1]
 }
-
 
 func (this *MinStack) GetMin() int {
 	if len(this.min) == 0 {
 		return 1 << 31
 	}
-	return this.min[len(this.min) - 1]
+	return this.min[len(this.min)-1]
 }
-
 
 /**
  * Your MinStack object will be instantiated and called as such:
@@ -63,4 +60,3 @@ func (this *MinStack) GetMin() int {
  * param_4 := obj.GetMin();
  */
 // @lc code=end
-

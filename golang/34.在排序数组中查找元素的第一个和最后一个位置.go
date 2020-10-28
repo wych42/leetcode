@@ -3,6 +3,7 @@
  *
  * [34] 在排序数组中查找元素的第一个和最后一个位置
  */
+package golang
 
 // @lc code=start
 func searchRange(nums []int, target int) []int {
@@ -17,11 +18,11 @@ func searchRange(nums []int, target int) []int {
 func binarySearchLeft(nums []int, target int) int {
 	start := 0
 	end := len(nums) - 1
-	for start + 1 < end {
+	for start+1 < end {
 		mid := (start + end) / 2
 		switch v := nums[mid]; {
 		case v >= target:
-			end = mid	
+			end = mid
 		case v < target:
 			start = mid
 		}
@@ -37,11 +38,11 @@ func binarySearchLeft(nums []int, target int) int {
 func binarySearchRight(nums []int, target int) int {
 	start := 0
 	end := len(nums) - 1
-	for start + 1 < end {
+	for start+1 < end {
 		mid := (start + end) / 2
 		switch v := nums[mid]; {
 		case v <= target:
-			start = mid	
+			start = mid
 		case v > target:
 			end = mid
 		}
@@ -54,5 +55,5 @@ func binarySearchRight(nums []int, target int) int {
 	}
 	return -1
 }
-// @lc code=end
 
+// @lc code=end

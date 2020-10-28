@@ -3,12 +3,13 @@
  *
  * [704] 二分查找
  */
+package golang
 
 // @lc code=start
 func search(nums []int, target int) int {
 	start := 0
 	end := len(nums) - 1
-	for start + 1 < end {
+	for start+1 < end {
 		mid := (start + end) / 2
 		switch v := nums[mid]; {
 		case v == target:
@@ -27,5 +28,5 @@ func search(nums []int, target int) int {
 	}
 	return -1
 }
-// @lc code=end
 
+// @lc code=end

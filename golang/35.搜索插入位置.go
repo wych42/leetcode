@@ -3,12 +3,13 @@
  *
  * [35] 搜索插入位置
  */
+package golang
 
 // @lc code=start
 func searchInsert(nums []int, target int) int {
 	start := 0
 	end := len(nums) - 1
-	for start + 1 < end {
+	for start+1 < end {
 		mid := (start + end) / 2
 		switch v := nums[mid]; {
 		case v == target:
@@ -25,8 +26,8 @@ func searchInsert(nums []int, target int) int {
 	case nums[end] >= t:
 		return end
 	default:
-		return end+1
+		return end + 1
 	}
 }
-// @lc code=end
 
+// @lc code=end

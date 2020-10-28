@@ -3,6 +3,7 @@
  *
  * [153] 寻找旋转排序数组中的最小值
  */
+package golang
 
 // @lc code=start
 func findMin(nums []int) int {
@@ -11,8 +12,8 @@ func findMin(nums []int) int {
 	}
 	start := 0
 	end := len(nums) - 1
-	for start + 1 < end {
-		mid := start + (end - start) / 2
+	for start+1 < end {
+		mid := start + (end-start)/2
 		switch v := nums[mid]; {
 		case v <= nums[end]:
 			end = mid
@@ -25,5 +26,5 @@ func findMin(nums []int) int {
 	}
 	return nums[start]
 }
-// @lc code=end
 
+// @lc code=end

@@ -37,6 +37,7 @@
  *
  *
  */
+package golang
 
 // @lc code=start
 /**
@@ -76,4 +77,3 @@ func levelOrder(root *TreeNode) [][]int {
 }
 
 // @lc code=end
-

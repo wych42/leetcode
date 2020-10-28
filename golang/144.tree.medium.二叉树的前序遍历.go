@@ -3,12 +3,7 @@
  *
  * [144] 二叉树的前序遍历
  */
-
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
-}
+package golang
 
 // @lc code=start
 /**
@@ -41,4 +36,3 @@ func preorderTraversal(root *TreeNode) []int {
 }
 
 // @lc code=end
-

@@ -4,6 +4,10 @@
  * [150] 逆波兰表达式求值
  */
 
+package golang
+
+import "strconv"
+
 // @lc code=start
 func evalRPN(tokens []string) int {
 	if len(tokens) == 0 {
@@ -12,12 +16,12 @@ func evalRPN(tokens []string) int {
 	stack := make([]int, 0)
 	for _, token := range tokens {
 		switch token {
-		case "+","-","*","/":
+		case "+", "-", "*", "/":
 			if len(stack) < 2 {
 				return -1
 			}
-			operator := stack[len(stack) - 1]
-			operand := stack[len(stack) - 2]
+			operator := stack[len(stack)-1]
+			operand := stack[len(stack)-2]
 			var v int
 			switch token {
 			case "+":
@@ -39,5 +43,5 @@ func evalRPN(tokens []string) int {
 	}
 	return stack[0]
 }
-// @lc code=end
 
+// @lc code=end

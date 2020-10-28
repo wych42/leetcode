@@ -36,35 +36,7 @@
  *
  */
 
-package main
-
-import "fmt"
-
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
-}
-
-func main() {
-	fmt.Println(
-		zigzagLevelOrder(&TreeNode{
-			Val: 3,
-			Left: &TreeNode{
-				Val: 9,
-			},
-			Right: &TreeNode{
-				Val: 20,
-				Left: &TreeNode{
-					Val: 15,
-				},
-				Right: &TreeNode{
-					Val: 7,
-				},
-			},
-		},
-		))
-}
+package golang
 
 // @lc code=start
 /**
