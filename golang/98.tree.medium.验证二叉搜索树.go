@@ -59,8 +59,8 @@ package golang
  */
 func isValidBST(root *TreeNode) bool {
 	stack := make([]*TreeNode, 0)
-	isLeft := true
 	current := root
+	var max, loop int
 	for len(stack) > 0 || current != nil {
 		// go to left leaf
 		for current != nil {
@@ -68,31 +68,17 @@ func isValidBST(root *TreeNode) bool {
 			current = current.Left
 		}
 		node := stack[len(stack)-1]
-		stack = stack[:len(stack)-1]
-		if node == root {
-			isLeft = false
+		if loop == 0 {
+			max = node.Val // most-left leaf
 		} else {
-			if isLeft {
-				if node.Val >= root.Val {
-					return false
-				}
-			} else {
-				if node.Val <= root.Val {
-					return false
-				}
-			}
-		}
-		if node.Left != nil {
-			if node.Left.Val >= node.Val {
+			if node.Val <= max {
 				return false
 			}
+			max = node.Val
 		}
-		if node.Right != nil {
-			if node.Right.Val <= node.Val {
-				return false
-			}
-		}
+		stack = stack[:len(stack)-1]
 		current = node.Right
+		loop = loop + 1
 	}
 	return true
 }
