@@ -1,9 +1,10 @@
+package golang
+
 /*
  * @lc app=leetcode.cn id=155 lang=golang
  *
  * [155] 最小栈
  */
-package golang
 
 // @lc code=start
 type MinStack struct {

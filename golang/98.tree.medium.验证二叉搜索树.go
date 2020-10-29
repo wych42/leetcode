@@ -1,3 +1,5 @@
+package golang
+
 /*
  * @lc app=leetcode.cn id=98 lang=golang
  *
@@ -46,7 +48,6 @@
  *
  *
  */
-package golang
 
 // @lc code=start
 /**

@@ -1,9 +1,10 @@
+package golang
+
 /*
  * @lc app=leetcode.cn id=144 lang=golang
  *
  * [144] 二叉树的前序遍历
  */
-package golang
 
 // @lc code=start
 /**

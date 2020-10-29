@@ -1,9 +1,10 @@
+package golang
+
 /*
  * @lc app=leetcode.cn id=154 lang=golang
  *
  * [154] 寻找旋转排序数组中的最小值 II
  */
-package golang
 
 // @lc code=start
 func findMin2(nums []int) int {

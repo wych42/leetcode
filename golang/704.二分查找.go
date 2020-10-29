@@ -1,9 +1,10 @@
+package golang
+
 /*
  * @lc app=leetcode.cn id=704 lang=golang
  *
  * [704] 二分查找
  */
-package golang
 
 // @lc code=start
 func search(nums []int, target int) int {
