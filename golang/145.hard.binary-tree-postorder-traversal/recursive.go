@@ -3,6 +3,7 @@
  */
 
 // 递归
+// @lc code=start
 var result []int
 
 func postorderTraversal(root *TreeNode) []int {
