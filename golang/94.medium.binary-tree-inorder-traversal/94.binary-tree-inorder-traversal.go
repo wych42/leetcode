@@ -112,20 +112,3 @@ func inorderTraversal(root *TreeNode) []int {
 }
 
 // @lc code=end
-
-// @lc code=start
-func inorderTraversal(root *TreeNode) []int {
-	result := make([]int, 0)
-	inorderTraversalRecursive(root, result)
-}
-
-func inorderTraversalRecursive(root *TreeNode, result []int) {
-	if root == nil {
-		return
-	}
-	inorderTraversalRecursive(root.Left, result)
-	result = append(root.Val)
-	inorderTraversalRecursive(root.Right, result)
-}
-
-// @lc code=end

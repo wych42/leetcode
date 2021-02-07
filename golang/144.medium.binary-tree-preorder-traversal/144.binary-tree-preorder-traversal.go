@@ -108,24 +108,3 @@ func preorderTraversal(root *TreeNode) []int {
 }
 
 // @lc code=end
-
-/*
- * @lc app=leetcode id=144 lang=golang
- */
-// @lc code=start
-func preorderTraversal(root *TreeNode) []int {
-	result := make([]int, 0)
-	preorderTraversalRecursive(root, result)
-	return result
-}
-func preorderTraversalRecursive(root *TreeNode, result []int) {
-	if root == nil {
-		return
-	}
-	result = append(result, root.Val)
-	preorderTraversalRecursive(root.Left, result)
-	preorderTraversalRecursive(root.Right, result)
-}
-
-// @lc code=end
-
