@@ -59,33 +59,37 @@ func searchRange(nums []int, target int) []int {
 func binarySearchLeft(nums []int, target int) int {
 	start := 0
 	end := len(nums) - 1
-	for start+1 < end {
-		mid := (start + end) / 2
+	// 查找区间是 [start,stop], 中止条件使用 start<end, 即中止时 start>=end
+	for start < end {
+		mid := start + (end-start)/2
 		switch v := nums[mid]; {
-		case v >= target:
-			end = mid
-		case v < target:
-			start = mid
+		case v > target: // 结果落在 [start,mid-1]
+			end = mid - 1
+		case v < target: // 结果落在 [mid+1,end]
+			start = mid + 1
+		case v==target:
+			end = mid // 结果可能就是 mid，也可能在 mid 前面
 		}
 	}
-	if nums[start] == target {
-		return start
+	if nums[start] != target { // 还差一个元素没有检查
+		return -1
 	}
-	if nums[end] == target {
-		return end
-	}
-	return -1
+	return start
 }
+
 func binarySearchRight(nums []int, target int) int {
 	start := 0
 	end := len(nums) - 1
+	// 搜索区间是 [start,end], 在 start + 1 = end 的时候停止, 最终会留下两个元素未检查
 	for start+1 < end {
-		mid := (start + end) / 2
+		mid := start + (end-start)/2
 		switch v := nums[mid]; {
-		case v <= target:
+		case v < target: // 结果在 mid 之后，所以 [mid+1,end]
+			start = mid + 1
+		case v > target: // 结果在 [start,mid-1] 中
+			end = mid-1
+		case v == target: // 结果可能是 mid，也能在 mid 之后，所以 [mid,end]
 			start = mid
-		case v > target:
-			end = mid
 		}
 	}
 	if nums[end] == target {
