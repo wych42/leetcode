@@ -61,31 +61,45 @@ func buildTree(preorder []int, inorder []int) *TreeNode {
 		return nil
 	}
 	preIdx, inIdx := 0, 0
+	// 用 stack 存放已经访问过的 preorder 节点
 	stack := make([]*TreeNode, 0)
+
+	// 生成 root，入栈
 	root := &TreeNode{Val: preorder[0]}
 	preIdx++
 	stack = append(stack, root)
 
 	for len(stack) > 0 {
 		top := stack[len(stack)-1]
+		/*
+			pre: root-left-right
+			in:  left-root-right
+			栈顶的节点，与 inorder 中的当前节点不相等，说明 preorder 还在向左的过程中。下一个节点是 top 的左子节点。
+			如果相等，把 inorder 指针右移，stack 出栈, 并继续判断下一个，如果下一个不想等，了，说明下一个 preorder 节点是出栈节点的右子节点
+		*/
 		if top.Val != inorder[inIdx] {
+			// 出栈的 top 节点在 inorder 中还没遇到对应的值
+			// 那么下一个 preorder 节点是 top 的左子节点
 			node := &TreeNode{Val: preorder[preIdx]}
 			preIdx++
 			top.Left = node
 			stack = append(stack, node)
-
 		} else {
 			stack = stack[:len(stack)-1]
 			inIdx++
 
+			// inorder 中的节点都访问过了，结束循环
 			if inIdx == len(inorder) {
 				break
 			}
 
+			// 栈里还有节点, 在 inorder 中没访问过（没找到对应的）,一个个比较，把已经访问过了出栈删掉
 			if len(stack) > 0 && stack[len(stack)-1].Val == inorder[inIdx] {
 				continue
 			}
 
+			// 剩下的栈顶的节点，inorder 中还没有找到对应的值(在后面), 说明栈顶节点和上一个出栈的 top 节点之间，还有inorder中没访问的右子树节点
+			// preorder 中的下一个节点，就是top的右子节点
 			node := &TreeNode{Val: preorder[preIdx]}
 			preIdx++
 			top.Right = node
