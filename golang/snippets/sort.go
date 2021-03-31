@@ -5,10 +5,10 @@ import (
 )
 
 /*
+	冒泡排序
     O(n^2),O(n^2),O(n),O(1),稳定
-	walk through the slice, compare element next to current one.
-	swap them if in wrong order.
-	repeat.
+	挨个比较相邻的两个元素，如果顺序错了就交换。循环再来一遍。
+	每次循环，都找出了最大的数,放到后面去。所以叫冒泡。
 */
 func bubbleSort(nums []int) []int {
 	length := len(nums)
@@ -23,9 +23,10 @@ func bubbleSort(nums []int) []int {
 }
 
 /*
+	选择排序
     O(n^2),O(n^2),O(n^2),O(1),不稳定
-	array contains sorted section: nums[:i] and unsorted section nums[i:]
-	for each loop(in unsoerted section), find minimal element, swap with first element.
+	把列表分为排序和未排序两部分: nums[:i] 和 nums[i:]
+	每次循环，都从为排序里面，找一个最小的，放到为排序的最前面。并把已排序的往后挪一位。
 */
 func selectionSort(nums []int) []int {
 	for i := 0; i < len(nums)-1; i++ {
@@ -41,7 +42,10 @@ func selectionSort(nums []int) []int {
 }
 
 /*
+  插入排序
   O(n^2),O(n^2),O(n),O(1),稳定
+  列表的 [:i] 是已经排序的。
+  每次循环，都从剩下的里面拿一个元素，找插入位置
   for each loop, consider [:i] is sorted.
   for each element of [i:], find the pos to insert in [:i] backward.
 */
@@ -49,22 +53,22 @@ func insertionSort(nums []int) []int {
 	for i := 1; i < len(nums)-1; i++ {
 		preIndex := i - 1
 		current := nums[i]
-		// has prv-element; pre element > current value,compare foward one.
+		// nums[:i] 前面还有数，并且前面的数大于当前数；继续往前比较
 		for preIndex >= 0 && nums[preIndex] > current {
-			// move pre-element back for 1 step.(in-place swap)
+			// 并且，把 preIndex 往后挪
 			nums[preIndex+1] = nums[preIndex]
 			preIndex = preIndex - 1
 		}
-		// pre-element < current, insert current behind pre-element.
+		// 否则，就把当前值放在 preIndex 后面
 		nums[preIndex+1] = current
 	}
 	return nums
 }
 
 /*
-  适合中等体量的数据.
-  选一个 interval(gap)，把相隔 interval 的数据分为一组，每组排序(粗排)
-  再对粗排后的结果，进行插入排序
+  希尔排序: 适合中等体量的数据.
+  选一个 interval/gap，每隔 gap 的数分为一组，每组排序(粗排)
+  再对粗排后的结果，更新（缩小 gap），再来一次，直到 gap 为 1，就是插入排序
   重点在于 interval 的选择: Knuth's Formula
 */
 func shellSort(nums []int) []int {
@@ -73,11 +77,12 @@ func shellSort(nums []int) []int {
 		gap = gap*3 + 1
 	}
 	for gap > 0 {
-		// 从第 gap 个数开始（第一组）
+		// 从第 gap 个数开始（第一组）; 一开始 gap 的值最大
 		for i := gap; i < len(nums); i++ {
 			j := i
 			current := nums[i]
-			// j-gap is previous element.
+			// j-gap 是这一组前一个数的下标
+			// 如果 前一个数比当前数大，就交换
 			for j-gap >= 0 && nums[j-gap] > current {
 				nums[j] = nums[j-gap]
 				j = j - gap
@@ -134,17 +139,17 @@ func quickSort(nums []int) []int {
 		return nums
 	}
 	l, r := 0, len(nums)-1
-	pivot := (len(nums) - 1) / 2 // or random
-	nums[pivot], nums[r] = nums[r], nums[pivot]
+	pivot := (len(nums) - 1) / 2                // 找中间的或者随机一个
+	nums[pivot], nums[r] = nums[r], nums[pivot] // 把基准数放到最后
 	for i := range nums {
-		if nums[i] < nums[r] { //compare with pivot
-			nums[l], nums[i] = nums[i], nums[l] // swap i to most left
-			l = l + 1                           // move left forward
+		if nums[i] < nums[r] { // 跟基准数比,如果比基准数小，就放到最左边
+			nums[l], nums[i] = nums[i], nums[l]
+			l = l + 1 // 并且把最左的坐标右移一个
 		}
 	}
-	nums[l], nums[r] = nums[r], nums[l] // swap current left with pivot value
-	quickSort(nums[:l])
-	quickSort(nums[l+1:])
+	nums[l], nums[r] = nums[r], nums[l] // 把当前的最左坐标值，跟最右坐标值换一下（把基准数放到中间）
+	quickSort(nums[:l])                 // 左边是都比基准数小的
+	quickSort(nums[l+1:])               // 右边是大的
 	return nums
 }
 
@@ -153,12 +158,15 @@ func quickSort(nums []int) []int {
 */
 func quickSortIter(nums []int) []int {
 	stack := make([]int, 0)
+	// 放入第一个分片的下标
 	stack = append(stack, 0, len(nums)-1)
 
 	for len(stack) > 0 {
 		temp := stack[len(stack)-2:]
+		// 出栈，拿到这次要处理的
 		l, r := temp[0], temp[1]
 		stack = stack[:len(stack)-2]
+		// 执行分片逻辑, 得到基准数的下标
 		pivot := partition(nums, l, r)
 		if pivot-1 > l { // elements in left side
 			stack = append(stack, l, pivot-1)
@@ -170,6 +178,7 @@ func quickSortIter(nums []int) []int {
 	return nums
 }
 
+// 分片，跟递归的分片流程一样
 func partition(nums []int, l, r int) int {
 	pivot := l + (r-l)/2
 	nums[pivot], nums[r] = nums[r], nums[pivot]
