@@ -60,22 +60,26 @@
  *     Right *TreeNode
  * }
  */
-/*
-对于一个 root，有两个选项：
-- root.Val + 左边没抢的 + 右边没抢的
-- max(左边抢了的，左边没抢的) + max(右边没抢的，右边抢了的); 因为不涉及 root，所以这里没问题
-
-一个后序遍历。
-
-问题是叶子节点：
-- 只有一个节点时，就抢，所以叶子节点默认设置为 robbed, 此时 notRobbed 为 0.
-*/
 type pair struct {
-	robbed    int
-	notRobbed int
+	withRoot    int
+	withoutRoot int
 }
 
 func rob(root *TreeNode) int {
+	/*
+	   子问题有两个：带root，和不带root
+	   带root：就不能抢左右子节点，只能向下走
+	   不带root：可以抢左右子节点，也可以跳过
+
+	   用一个后序遍历，对每一个树，都找到它的左右子树 [带root，不带root]
+	   那么这棵树：
+	     带root：root+左不带root+右不带root
+	     不带root：max(左边不带root，左边带root) + max(右边同理)
+
+	   对于叶子节点：带root=root.Val, 不带 root = 0
+	   对于空节点: [0, 0]
+	*/
+
 	if root == nil {
 		return 0
 	}
@@ -83,21 +87,19 @@ func rob(root *TreeNode) int {
 		return root.Val
 	}
 	p := dfs(root)
-	return max(p.robbed, p.notRobbed)
+	return max(p.withRoot, p.withoutRoot)
 }
 
 func dfs(root *TreeNode) pair {
 	if root == nil {
 		return pair{}
 	}
-	if root.Left == nil && root.Right == nil {
-		return pair{robbed: root.Val}
-	}
+	p := pair{withRoot: root.Val}
+	p := pair{}
 	l := dfs(root.Left)
 	r := dfs(root.Right)
-	p := pair{}
-	p.robbed = root.Val + l.notRobbed + r.notRobbed
-	p.notRobbed = max(l.robbed, l.notRobbed) + max(r.robbed, r.notRobbed)
+	p.withRoot = root.Val + l.withoutRoot + r.withoutRoot
+	p.withoutRoot = max(l.withRoot, l.withoutRoot) + max(r.withRoot, r.withoutRoot)
 	return p
 }
 
