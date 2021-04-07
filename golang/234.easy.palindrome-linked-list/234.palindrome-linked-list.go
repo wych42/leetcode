@@ -61,19 +61,27 @@ func isPalindrome(head *ListNode) bool {
 	slow, fast := head, head.Next
 	dummy := &ListNode{}
 	var temp *ListNode
+	// 先用 fast 找到结尾,slow 此时在中间
 	for fast != nil && fast.Next != nil {
 		fast = fast.Next.Next
 
+		// 同时把slow走过的路径反过来插到 dummy 后面
 		temp = slow.Next
 		slow.Next = dummy.Next
 		dummy.Next = slow
 		slow = temp
 	}
+	// slow.Next 是后半部分的开头
 	l2 := slow.Next
+
+	// 把 slow 插到 dummy 后面
+	// 如果是偶数个节点，fast 此时正好在最后一个节点上，slow要算作前半部分
 	if fast != nil {
 		slow.Next = dummy.Next
 		dummy.Next = slow
 	}
+
+	// dummy.Next 是前半部分的开头
 	l1 := dummy.Next
 
 	for l1 != nil && l2 != nil {
