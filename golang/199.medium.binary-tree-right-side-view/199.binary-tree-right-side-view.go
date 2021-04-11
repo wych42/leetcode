@@ -68,6 +68,9 @@ func rightSideView(root *TreeNode) []int {
 	if root.Left == nil && root.Right == nil {
 		return []int{root.Val}
 	}
+	// 树的每一层只能放最右边的节点
+	// 那就来一个 right - left 的遍历
+	// 遍历参数里带上当前遍历的是哪一层
 	values = make([]int, 0)
 	traversal(root, 0)
 	return values
