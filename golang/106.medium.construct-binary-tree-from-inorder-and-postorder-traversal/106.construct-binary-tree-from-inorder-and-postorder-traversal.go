@@ -57,6 +57,14 @@
  * }
  */
 func buildTree(inorder []int, postorder []int) *TreeNode {
+	/*
+	 inorder: left-root-right
+	 postorder: left-right-root
+
+	 那么找到跟节点: postorder 的最后一个元素
+	 在 inorder 中找到这个根节点 idx，它的左边就是左子树；右边就是右子树
+	 同时, postorder 中, [0:idx] 也是左子树, [idx:len-1] 就是右子树
+	*/
 	if len(postorder) == 0 || len(inorder) == 0 {
 		return nil
 	}
