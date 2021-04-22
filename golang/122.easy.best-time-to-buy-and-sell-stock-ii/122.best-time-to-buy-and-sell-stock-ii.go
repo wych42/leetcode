@@ -82,7 +82,8 @@ func maxProfit(prices []int) int {
 		with = currWith
 		withOut = currWithOut
 	}
-	return max(with, withOut)
+	// return max(with, withOut)
+	return withOut
 }
 
 func max(a, b int) int {
