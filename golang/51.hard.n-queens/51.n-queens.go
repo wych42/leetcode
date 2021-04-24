@@ -62,8 +62,6 @@ func solveNQueens(n int) [][]string {
 		3. 尝试摆下一行；
 	*/
 	// 每个Queen放一行，每个 []int 记录每一行上 Queen 所在列
-	// cols 就是结果集合
-	//tmpl = strings.Repeat(".", n)
 	answerSets = make([][]int, 0)
 	backtrack(n, 0, []int{})
 	result := make([][]string, 0, len(answerSets))
