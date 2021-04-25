@@ -53,7 +53,6 @@
  */
 /*
 整体思路：不从链表里删除节点，而是找能够加到链表末尾的节点
-
 */
 func deleteDuplicates(head *ListNode) *ListNode {
 	var res, tail *ListNode

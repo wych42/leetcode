@@ -106,14 +106,8 @@ func connect(root *Node) *Node {
 		if node == nil {
 			continue
 		}
-		if node.Left != nil {
-			queue = append(queue, node.Left)
-		}
-		if node.Right != nil {
-			queue = append(queue, node.Right)
-		}
 
-		// queue = append(queue, node.Left, node.Right)
+		queue = append(queue, node.Left, node.Right)
 		layer = append(layer, node)
 	}
 	return root

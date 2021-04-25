@@ -56,9 +56,7 @@
 
 // @lc code=start
 func longestPalindrome(s string) string {
-	/*
-		从子问题出发：s[i:j] 是回文的前提是 s[i+1:j-1] 是回文，并且 s[i]==s[j]
-	*/
+
 	m := make(map[string]bool)
 	m[""] = true
 	var ans string

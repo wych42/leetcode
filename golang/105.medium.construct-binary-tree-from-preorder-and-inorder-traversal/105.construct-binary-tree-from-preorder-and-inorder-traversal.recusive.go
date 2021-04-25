@@ -60,7 +60,7 @@
 preorder: root, left, rigth. 第一个元素是 Root
 inorder: left, root, rigth. 第一个元素是最左节点
 
-从 preorder 中不断的生成 node 节点，直到节点的值等于 inorder 中的值
+从 preorder 中不断的生成 node 节点，存到一个 stack 中。
 
 */
 
