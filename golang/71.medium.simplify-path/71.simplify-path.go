@@ -93,7 +93,7 @@ func simplifyPath(path string) string {
 		/ . 就跳过
 		碰到 .. 就出栈
 	*/
-	segs := strings.Split(path, "/", -1)
+	segs := strings.Split(path, "/")
 	stack := make([]string, 0)
 	for _, seg := range segs {
 		switch seg {
