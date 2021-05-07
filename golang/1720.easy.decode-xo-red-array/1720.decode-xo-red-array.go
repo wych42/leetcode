@@ -73,10 +73,9 @@ func decode(encoded []int, first int) []int {
 	res[0] = first
 	for i := 0; i < len(encoded); i++ {
 		first = encoded[i] ^ first
-		encoded[i] = first
+		res[i+1] = first
 	}
-	encoded = append(encoded, encoded[len(encoded)-1]^first)
-	return encoded
+	return res
 }
 
 // @lc code=end
