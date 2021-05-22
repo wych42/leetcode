@@ -78,6 +78,7 @@
  */
 
 // @lc code=start
+// 与 1723 相似
 func shipWithinDays(weights []int, d int) int {
 	/*
 		要找的数是载重量 w，最大 sum(weights), days=1; 最小 max(weights), days=len(weights)
