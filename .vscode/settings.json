@@ -1,0 +1,14 @@
+{
+	"go.toolsEnvVars": {
+		// "GOPRIVATE": "",
+		"GOPROXY": "https://goproxy.cn",
+		"GONOPROXY": "none;"
+		// "GONOSUMDB": ""
+	},
+	"terminal.integrated.env.linux": {
+		// "GOPRIVATE": "",
+		"GOPROXY": "https://goproxy.cn",
+		"GONOPROXY": "none;",
+		// "GONOSUMDB": ""
+	}
+}
