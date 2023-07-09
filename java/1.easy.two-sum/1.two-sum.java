@@ -70,15 +70,18 @@ class Solution {
         // go through the nums again, if num exists in the diffMap, return the idx of current number and map value.
         Map<Integer, Integer> diffMap = new HashMap<>();
         for (int i=0;i<nums.length; i++) {
-            diffMap.put(target-nums[i], i);
-        }
-        for (int i=0;i<nums.length;i++) {
-            Integer pos = diffMap.get(nums[i]);
-            // can't use same num twice
-            if (pos != null && !pos.equals(i)) {
+            if (diffMap.get(nums[i]) != null && !diffMap.get(nums[i]).equals(i)) {
                 return new int[]{i, diffMap.get(nums[i])};
             }
+            diffMap.put(target-nums[i], i);
         }
+        // for (int i=0;i<nums.length;i++) {
+        //     Integer pos = diffMap.get(nums[i]);
+        //     // can't use same num twice
+        //     if (pos != null && !pos.equals(i)) {
+        //         return new int[]{i, diffMap.get(nums[i])};
+        //     }
+        // }
         return new int[2];
     }
 }
