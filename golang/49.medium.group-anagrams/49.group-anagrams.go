@@ -1,3 +1,5 @@
+package main
+
 /*
  * @lc app=leetcode.cn id=49 lang=golang
  *
@@ -44,11 +46,21 @@
 
 // @lc code=start
 
+import "strconv"
+
 func groupAnagrams(strs []string) [][]string {
 	result := make(map[string][]string)
 	for _, str := range strs {
-		// for each str, check if it's anagram aganist each key in result map
-		sign := getAnagramSignature(str)
+		// for each str, find its singature
+		signature := make(map[rune]int) // only contains lowercase letter
+		for _, r := range str {
+			signature[r]++
+		}
+		sign := ""
+		for i := 'a'; i <= 'z'; i++ {
+			sign += string(i) + strconv.Itoa(signature[i])
+		}
+
 		if _, ok := result[sign]; ok {
 			result[sign] = append(result[sign], str)
 		} else {
@@ -62,22 +74,4 @@ func groupAnagrams(strs []string) [][]string {
 	return res
 }
 
-func getAnagramSignature(s string) string {
-	if len(s) == 0 {
-		return s
-	}
-	m := make(map[rune]int)
-	for _, ch := range s {
-		m[ch]++
-	}
-	sign := ""
-	for i := 'a'; i <= 'z'; i++ {
-		if _, ok := m[i]; ok {
-			sign += fmt.Sprintf("%c%d", i, m[i])
-		}
-	}
-	return sign
-}
-
 // @lc code=end
-
