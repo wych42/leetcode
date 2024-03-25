@@ -10,5 +10,6 @@
 		"GOPROXY": "https://goproxy.cn",
 		"GONOPROXY": "none;",
 		// "GONOSUMDB": ""
-	}
+	},
+	"java.debug.settings.onBuildFailureProceed": true
 }
