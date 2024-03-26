@@ -56,8 +56,6 @@
 
 package main
 
-import "fmt"
-
 // @lc code=start
 
 func maxArea(height []int) int {
@@ -70,7 +68,6 @@ func maxArea(height []int) int {
 	for l < r {
 		hl := height[l]
 		hr := height[r]
-		fmt.Println(l, r, hl, hr)
 		result = max(result, (r-l)*min(hl, hr))
 		if hl < hr { // left is shorter, move left
 			l++
